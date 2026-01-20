@@ -5,7 +5,11 @@ const OPEN_LIBRARY_API = 'https://openlibrary.org';
 
 export const googleBooksApi = axios.create({
   baseURL: GOOGLE_BOOKS_API,
-  timeout: 10000,
+  timeout: 15000, // Increased timeout
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
 });
 
 export const openLibraryApi = axios.create({
@@ -22,13 +26,20 @@ const handleResponse = (response) => response;
 const handleResponseError = (error) => {
   if (error.response) {
     // Server responded with error
-    console.error('API Error:', error.response.data);
+    console.error('API Error:', {
+      status: error.response.status,
+      statusText: error.response.statusText,
+      data: error.response.data,
+    });
   } else if (error.request) {
     // Request made but no response
-    console.error('Network Error:', error.message);
+    console.error('Network Error:', {
+      message: error.message,
+      request: error.request,
+    });
   } else {
     // Something else happened
-    console.error('Error:', error.message);
+    console.error('Request Setup Error:', error.message);
   }
   return Promise.reject(error);
 };

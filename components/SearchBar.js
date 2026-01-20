@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Colors from '../constants/Colors';
 
-export default function SearchBar({ value, onChangeText, placeholder, onClear }) {
+export default function SearchBar({ value, onChangeText, placeholder, onClear, onSubmitEditing }) {
   return (
     <View style={styles.container}>
       <View style={styles.searchIcon}>
         <Text style={styles.iconText}>🔍</Text>
       </View>
+      
       <TextInput
         style={styles.input}
         value={value}
@@ -16,7 +17,10 @@ export default function SearchBar({ value, onChangeText, placeholder, onClear })
         placeholderTextColor={Colors.textSecondary}
         autoCapitalize="none"
         autoCorrect={false}
+        onSubmitEditing={onSubmitEditing}
+        returnKeyType="search"
       />
+      
       {value !== '' && (
         <TouchableOpacity style={styles.clearButton} onPress={onClear}>
           <Text style={styles.clearText}>✕</Text>
@@ -48,6 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: Colors.text,
+    height: '100%',
   },
   clearButton: {
     padding: 4,

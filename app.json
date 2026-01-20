@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#5FD068"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.bookexplorer.app"
